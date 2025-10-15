@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   BadgeCheck,
   Camera,
@@ -14,7 +14,7 @@ import {
   Settings,
   ShieldCheck,
   Star,
-} from "lucide-react"
+} from "lucide-react";
 
 const recentOrders = [
   {
@@ -31,7 +31,7 @@ const recentOrders = [
     status: "تحویل داده شد",
     eta: "تحویل به پیک در ۲۱ فروردین",
   },
-]
+];
 
 const savedAddresses = [
   {
@@ -44,7 +44,7 @@ const savedAddresses = [
     details: "تهران، ولیعصر، خیابان پارسا، پلاک ۴۳، طبقه ۳",
     contact: "۰۹۳۵۴۳۲۱۱۹۸",
   },
-]
+];
 
 export function ProfilePage() {
   return (
@@ -59,7 +59,9 @@ export function ProfilePage() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">فاطمه رضایی</h1>
-                  <p className="text-muted-foreground">عضو از ۱۴۰۱ · پلن حرفه‌ای چاپ عکس</p>
+                  <p className="text-muted-foreground">
+                    عضو از ۱۴۰۱ · پلن حرفه‌ای چاپ عکس
+                  </p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -104,7 +106,9 @@ export function ProfilePage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-semibold">جزییات حساب</h2>
-                  <p className="text-sm text-muted-foreground">پیکربندی اطلاعات شخصی و تنظیمات امنیتی حساب</p>
+                  <p className="text-sm text-muted-foreground">
+                    پیکربندی اطلاعات شخصی و تنظیمات امنیتی حساب
+                  </p>
                 </div>
                 <Button variant="outline" size="sm">
                   ویرایش پروفایل
@@ -112,19 +116,27 @@ export function ProfilePage() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-lg border border-dashed border-border/60 p-4">
-                  <p className="text-xs text-muted-foreground mb-1">آخرین ورود</p>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    آخرین ورود
+                  </p>
                   <p className="font-medium">۱۲ خرداد ۱۴۰۳ · تهران</p>
                 </div>
                 <div className="rounded-lg border border-dashed border-border/60 p-4">
-                  <p className="text-xs text-muted-foreground mb-1">روش ورود فعال</p>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    روش ورود فعال
+                  </p>
                   <p className="font-medium">رمز یکبارمصرف پیامکی + رمز عبور</p>
                 </div>
                 <div className="rounded-lg border border-dashed border-border/60 p-4">
-                  <p className="text-xs text-muted-foreground mb-1">فضای گالری</p>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    فضای گالری
+                  </p>
                   <p className="font-medium">۱٫۸ گیگابایت از ۵ گیگابایت</p>
                 </div>
                 <div className="rounded-lg border border-dashed border-border/60 p-4">
-                  <p className="text-xs text-muted-foreground mb-1">اشتراک فعال</p>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    اشتراک فعال
+                  </p>
                   <p className="font-medium">پلن حرفه‌ای تا ۲۹ اسفند ۱۴۰۳</p>
                 </div>
               </div>
@@ -134,7 +146,9 @@ export function ProfilePage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-semibold">سفارش‌های اخیر</h2>
-                  <p className="text-sm text-muted-foreground">پیگیری وضعیت تولید و ارسال چاپ‌ها</p>
+                  <p className="text-sm text-muted-foreground">
+                    پیگیری وضعیت تولید و ارسال چاپ‌ها
+                  </p>
                 </div>
                 <Button variant="outline" size="sm" className="gap-2">
                   <Package className="h-4 w-4" />
@@ -143,18 +157,27 @@ export function ProfilePage() {
               </div>
               <div className="space-y-4">
                 {recentOrders.map((order) => (
-                  <div key={order.id} className="rounded-lg border border-border/60 p-4">
+                  <div
+                    key={order.id}
+                    className="rounded-lg border border-border/60 p-4"
+                  >
                     <div className="flex flex-wrap items-center gap-3 justify-between">
                       <div>
                         <p className="font-semibold">{order.id}</p>
-                        <p className="text-xs text-muted-foreground">{order.date}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {order.date}
+                        </p>
                       </div>
                       <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-600">
                         {order.status}
                       </span>
                     </div>
-                    <p className="mt-3 text-sm text-muted-foreground">{order.items}</p>
-                    <p className="mt-2 text-xs text-muted-foreground">{order.eta}</p>
+                    <p className="mt-3 text-sm text-muted-foreground">
+                      {order.items}
+                    </p>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      {order.eta}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -164,7 +187,9 @@ export function ProfilePage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-semibold">ترجیحات چاپ</h2>
-                  <p className="text-sm text-muted-foreground">پیش‌فرض‌های اعمال‌شده روی سفارش‌های شما</p>
+                  <p className="text-sm text-muted-foreground">
+                    پیش‌فرض‌های اعمال‌شده روی سفارش‌های شما
+                  </p>
                 </div>
                 <Button variant="outline" size="sm" className="gap-2">
                   <Camera className="h-4 w-4" />
@@ -175,22 +200,30 @@ export function ProfilePage() {
                 <div className="rounded-lg border border-border/60 p-4 space-y-1">
                   <p className="text-xs text-muted-foreground">تصحیح رنگ</p>
                   <p className="font-medium">پروفایل زنده (Vivid)</p>
-                  <p className="text-xs text-muted-foreground">مناسب چاپ‌های گلاسه و آلبوم</p>
+                  <p className="text-xs text-muted-foreground">
+                    مناسب چاپ‌های گلاسه و آلبوم
+                  </p>
                 </div>
                 <div className="rounded-lg border border-border/60 p-4 space-y-1">
                   <p className="text-xs text-muted-foreground">حاشیه دلخواه</p>
                   <p className="font-medium">قاب سفید ۸ میلی‌متری</p>
-                  <p className="text-xs text-muted-foreground">جهت قاب‌بندی هنری آماده ارسال</p>
+                  <p className="text-xs text-muted-foreground">
+                    جهت قاب‌بندی هنری آماده ارسال
+                  </p>
                 </div>
                 <div className="rounded-lg border border-border/60 p-4 space-y-1">
                   <p className="text-xs text-muted-foreground">ویرایش خودکار</p>
                   <p className="font-medium">بهینه‌سازی چهره فعال</p>
-                  <p className="text-xs text-muted-foreground">نویزگیری و تنظیم نور پرتره</p>
+                  <p className="text-xs text-muted-foreground">
+                    نویزگیری و تنظیم نور پرتره
+                  </p>
                 </div>
                 <div className="rounded-lg border border-border/60 p-4 space-y-1">
                   <p className="text-xs text-muted-foreground">نوع بسته‌بندی</p>
                   <p className="font-medium">بسته هدیه با روبان</p>
-                  <p className="text-xs text-muted-foreground">اضافه به صورت پیش‌فرض برای مناسبت‌ها</p>
+                  <p className="text-xs text-muted-foreground">
+                    اضافه به صورت پیش‌فرض برای مناسبت‌ها
+                  </p>
                 </div>
               </div>
             </Card>
@@ -202,17 +235,25 @@ export function ProfilePage() {
                 <ShieldCheck className="h-5 w-5 text-primary" />
                 <div>
                   <h2 className="text-lg font-semibold">باشگاه مشتریان</h2>
-                  <p className="text-sm text-muted-foreground">امتیازهای قابل استفاده برای سفارش بعدی</p>
+                  <p className="text-sm text-muted-foreground">
+                    امتیازهای قابل استفاده برای سفارش بعدی
+                  </p>
                 </div>
               </div>
               <div className="rounded-lg border border-dashed border-border/60 p-4 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">امتیاز فعلی</span>
+                  <span className="text-sm text-muted-foreground">
+                    امتیاز فعلی
+                  </span>
                   <span className="text-xl font-bold">۳٬۸۵۰</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">تخفیف در دسترس</span>
-                  <span className="font-medium text-primary">۱۵٪ روی چاپ‌های بعدی</span>
+                  <span className="text-sm text-muted-foreground">
+                    تخفیف در دسترس
+                  </span>
+                  <span className="font-medium text-primary">
+                    ۱۵٪ روی چاپ‌های بعدی
+                  </span>
                 </div>
                 <Button size="sm" className="w-full">
                   تبدیل به کد تخفیف
@@ -225,8 +266,12 @@ export function ProfilePage() {
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-primary" />
                   <div>
-                    <h2 className="text-lg font-semibold">آدرس‌های ذخیره‌شده</h2>
-                    <p className="text-sm text-muted-foreground">برای ارسال سریع‌تر سفارش‌ها</p>
+                    <h2 className="text-lg font-semibold">
+                      آدرس‌های ذخیره‌شده
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      برای ارسال سریع‌تر سفارش‌ها
+                    </p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
@@ -235,12 +280,19 @@ export function ProfilePage() {
               </div>
               <div className="space-y-3">
                 {savedAddresses.map((address) => (
-                  <div key={address.label} className="rounded-lg border border-border/60 p-4 space-y-1">
+                  <div
+                    key={address.label}
+                    className="rounded-lg border border-border/60 p-4 space-y-1"
+                  >
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">{address.label}</span>
-                      <span className="text-xs text-muted-foreground">{address.contact}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {address.contact}
+                      </span>
                     </div>
-                    <p className="text-xs text-muted-foreground">{address.details}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {address.details}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -251,7 +303,9 @@ export function ProfilePage() {
                 <CreditCard className="h-5 w-5 text-primary" />
                 <div>
                   <h2 className="text-lg font-semibold">روش‌های پرداخت</h2>
-                  <p className="text-sm text-muted-foreground">کارت‌های تایید شده برای پرداخت سریع</p>
+                  <p className="text-sm text-muted-foreground">
+                    کارت‌های تایید شده برای پرداخت سریع
+                  </p>
                 </div>
               </div>
               <div className="space-y-3">
@@ -260,7 +314,9 @@ export function ProfilePage() {
                     <span className="font-medium">کارت بانک ملت</span>
                     <Star className="h-4 w-4 fill-primary text-primary" />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">**** **** **** ۵۴۳۲ · اعتبار تا ۰۴/۱۴۰۵</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    **** **** **** ۵۴۳۲ · اعتبار تا ۰۴/۱۴۰۵
+                  </p>
                 </div>
                 <div className="rounded-lg border border-dashed border-border/60 p-4 text-center text-xs text-muted-foreground">
                   کارت جدیدی اضافه کنید تا پرداخت‌های بعدی سریع‌تر انجام شود
@@ -271,6 +327,5 @@ export function ProfilePage() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-
