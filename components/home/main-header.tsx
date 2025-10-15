@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 const secondaryLinks = [
+  { href: "/products/polaroid", label: "چاپ پولاروید" },
   { href: "#", label: "چاپ عکس" },
   { href: "#", label: "آلبوم عکس" },
   { href: "#", label: "قاب عکس" },
