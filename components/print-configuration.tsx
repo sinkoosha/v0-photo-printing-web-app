@@ -23,6 +23,20 @@ interface PrintMaterial {
   priceMultiplier: number
 }
 
+interface EnhancementOption {
+  id: string
+  name: string
+  description: string
+  priceAdjustment: number
+}
+
+interface PackagingOption {
+  id: string
+  name: string
+  description: string
+  price: number
+}
+
 const printSizes: PrintSize[] = [
   { id: "10x15", name: "۱۰×۱۵ سانتی‌متر", dimensions: "10×15 cm", price: 15000 },
   { id: "13x18", name: "۱۳×۱۸ سانتی‌متر", dimensions: "13×18 cm", price: 25000 },
@@ -37,17 +51,90 @@ const printMaterials: PrintMaterial[] = [
   { id: "canvas", name: "بوم نقاشی", description: "حرفه‌ای - مناسب دکوراسیون", priceMultiplier: 2.5 },
 ]
 
+const colorCorrections: EnhancementOption[] = [
+  {
+    id: "none",
+    name: "بدون تصحیح",
+    description: "اعمال هیچگونه تنظیم خودکار",
+    priceAdjustment: 0,
+  },
+  {
+    id: "smart",
+    name: "اصلاح هوشمند",
+    description: "تنظیم نور و رنگ بر اساس محتوای عکس",
+    priceAdjustment: 4000,
+  },
+  {
+    id: "studio",
+    name: "ادیت استودیو",
+    description: "بازبینی متخصص چاپ برای خروجی پرتره",
+    priceAdjustment: 9500,
+  },
+]
+
+const borderStyles: EnhancementOption[] = [
+  {
+    id: "borderless",
+    name: "بدون حاشیه",
+    description: "چاپ لب به لب مناسب آلبوم",
+    priceAdjustment: 0,
+  },
+  {
+    id: "classic",
+    name: "قاب سفید ۵ میلی‌متری",
+    description: "فضای مناسب قاب‌بندی هنری",
+    priceAdjustment: 2500,
+  },
+  {
+    id: "gallery",
+    name: "فریم گالری مشکی",
+    description: "کنتراست بالا برای نمایشگاه",
+    priceAdjustment: 6500,
+  },
+]
+
+const packagingOptions: PackagingOption[] = [
+  {
+    id: "standard",
+    name: "بسته‌بندی استاندارد",
+    description: "پاکت مقاوم با پوشش ضد رطوبت",
+    price: 0,
+  },
+  {
+    id: "flat",
+    name: "پک فلت آرت",
+    description: "تخته محافظ و تسمه کاغذی برای چاپ‌های بزرگ",
+    price: 18000,
+  },
+  {
+    id: "gift",
+    name: "بسته هدیه",
+    description: "جعبه سخت، کاغذ کرپ و روبان",
+    price: 35000,
+  },
+]
+
 export function PrintConfiguration() {
   const [selectedSize, setSelectedSize] = useState<string>("20x30")
   const [selectedMaterial, setSelectedMaterial] = useState<string>("glossy")
   const [quantity, setQuantity] = useState<number>(1)
+  const [selectedCorrection, setSelectedCorrection] = useState<string>("smart")
+  const [selectedBorder, setSelectedBorder] = useState<string>("classic")
+  const [selectedPackaging, setSelectedPackaging] = useState<string>("flat")
 
   const currentSize = printSizes.find((s) => s.id === selectedSize)
   const currentMaterial = printMaterials.find((m) => m.id === selectedMaterial)
+  const currentCorrection = colorCorrections.find((c) => c.id === selectedCorrection)
+  const currentBorder = borderStyles.find((b) => b.id === selectedBorder)
+  const currentPackaging = packagingOptions.find((p) => p.id === selectedPackaging)
 
   const basePrice = currentSize?.price || 0
   const materialMultiplier = currentMaterial?.priceMultiplier || 1
-  const totalPrice = basePrice * materialMultiplier * quantity
+  const perPrintBase = basePrice * materialMultiplier
+  const perPrintExtras = (currentCorrection?.priceAdjustment || 0) + (currentBorder?.priceAdjustment || 0)
+  const perPrintTotal = perPrintBase + perPrintExtras
+  const packagingPrice = currentPackaging?.price || 0
+  const totalPrice = perPrintTotal * quantity + packagingPrice
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("fa-IR").format(price)
@@ -133,6 +220,101 @@ export function PrintConfiguration() {
                 </RadioGroup>
               </Card>
 
+              {/* Advanced Enhancements */}
+              <Card className="p-6 space-y-6">
+                <div>
+                  <h2 className="text-xl font-semibold">تنظیمات پیشرفته</h2>
+                  <p className="text-sm text-muted-foreground">گزینه‌های حرفه‌ای چاپ برای کنترل بیشتر خروجی</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2">تصحیح رنگ</h3>
+                    <RadioGroup
+                      value={selectedCorrection}
+                      onValueChange={setSelectedCorrection}
+                      className="grid gap-3"
+                    >
+                      {colorCorrections.map((option) => (
+                        <div key={option.id} className="relative">
+                          <RadioGroupItem value={option.id} id={`correction-${option.id}`} className="peer sr-only" />
+                          <Label
+                            htmlFor={`correction-${option.id}`}
+                            className="flex items-center justify-between gap-4 rounded-lg border-2 border-border p-4 transition-all hover:bg-accent/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                          >
+                            <div>
+                              <p className="font-medium">{option.name}</p>
+                              <p className="text-xs text-muted-foreground mt-1">{option.description}</p>
+                            </div>
+                            {option.priceAdjustment > 0 ? (
+                              <span className="text-xs text-muted-foreground">
+                                +{formatPrice(option.priceAdjustment)} تومان / هر چاپ
+                              </span>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">بدون هزینه اضافه</span>
+                            )}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2">حاشیه چاپ</h3>
+                    <RadioGroup value={selectedBorder} onValueChange={setSelectedBorder} className="grid gap-3">
+                      {borderStyles.map((option) => (
+                        <div key={option.id} className="relative">
+                          <RadioGroupItem value={option.id} id={`border-${option.id}`} className="peer sr-only" />
+                          <Label
+                            htmlFor={`border-${option.id}`}
+                            className="flex items-center justify-between gap-4 rounded-lg border-2 border-border p-4 transition-all hover:bg-accent/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                          >
+                            <div>
+                              <p className="font-medium">{option.name}</p>
+                              <p className="text-xs text-muted-foreground mt-1">{option.description}</p>
+                            </div>
+                            {option.priceAdjustment > 0 ? (
+                              <span className="text-xs text-muted-foreground">
+                                +{formatPrice(option.priceAdjustment)} تومان / هر چاپ
+                              </span>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">بدون هزینه اضافه</span>
+                            )}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2">نوع بسته‌بندی</h3>
+                    <RadioGroup value={selectedPackaging} onValueChange={setSelectedPackaging} className="grid gap-3">
+                      {packagingOptions.map((option) => (
+                        <div key={option.id} className="relative">
+                          <RadioGroupItem value={option.id} id={`packaging-${option.id}`} className="peer sr-only" />
+                          <Label
+                            htmlFor={`packaging-${option.id}`}
+                            className="flex items-center justify-between gap-4 rounded-lg border-2 border-border p-4 transition-all hover:bg-accent/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5"
+                          >
+                            <div>
+                              <p className="font-medium">{option.name}</p>
+                              <p className="text-xs text-muted-foreground mt-1">{option.description}</p>
+                            </div>
+                            {option.price > 0 ? (
+                              <span className="text-xs text-muted-foreground">
+                                +{formatPrice(option.price)} تومان / سفارش
+                              </span>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">شامل در قیمت پایه</span>
+                            )}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+                </div>
+              </Card>
+
               {/* Quantity Selection */}
               <Card className="p-6">
                 <h2 className="text-xl font-semibold mb-4">تعداد</h2>
@@ -174,22 +356,40 @@ export function PrintConfiguration() {
                     <span className="text-muted-foreground">تعداد:</span>
                     <span className="font-medium">{quantity} عدد</span>
                   </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">تصحیح رنگ:</span>
+                    <span className="font-medium">{currentCorrection?.name}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">حاشیه:</span>
+                    <span className="font-medium">{currentBorder?.name}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">بسته‌بندی:</span>
+                    <span className="font-medium">{currentPackaging?.name}</span>
+                  </div>
 
                   <div className="pt-4 border-t border-border">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">قیمت پایه:</span>
-                      <span>{formatPrice(basePrice)} تومان</span>
+                      <span className="text-muted-foreground">قیمت پایه هر چاپ:</span>
+                      <span>{formatPrice(perPrintBase)} تومان</span>
                     </div>
-                    {materialMultiplier > 1 && (
+                    {perPrintExtras > 0 && (
                       <div className="flex justify-between text-sm mb-2">
-                        <span className="text-muted-foreground">هزینه متریال:</span>
-                        <span>×{materialMultiplier}</span>
+                        <span className="text-muted-foreground">افزودنی‌های هر چاپ:</span>
+                        <span>{formatPrice(perPrintExtras)} تومان</span>
                       </div>
                     )}
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">تعداد:</span>
+                      <span className="text-muted-foreground">تعداد چاپ:</span>
                       <span>×{quantity}</span>
                     </div>
+                    {packagingPrice > 0 && (
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="text-muted-foreground">بسته‌بندی ویژه:</span>
+                        <span>{formatPrice(packagingPrice)} تومان</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-4 border-t border-border">
