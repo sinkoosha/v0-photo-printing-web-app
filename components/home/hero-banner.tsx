@@ -1,10 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export function HeroBanner() {
   return (
-    <section className="mx-auto w-full max-w-[1200px] px-4 pb-12 pt-8 md:px-6 md:pt-12">
-      <div className="relative overflow-hidden rounded-[32px] bg-[#F1E4D7] shadow-[0_20px_45px_-25px_rgba(90,74,64,0.45)]">
+    <section className="mx-auto w-full px-4 pb-12 pt-8 md:px-6 md:pt-12">
+      <div className="relative overflow-hidden  bg-[#F1E4D7] shadow-[0_20px_45px_-25px_rgba(90,74,64,0.45)]">
         <Image
           src="https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?auto=format&fit=crop&w=1600&q=80"
           alt="چیدمان قاب‌های دیواری مدرن در اتاق نشیمن"
@@ -22,8 +22,9 @@ export function HeroBanner() {
             قاب‌های جدید دیواری
           </h2>
           <p className="max-w-[420px] text-sm text-[#5A4A40] sm:text-base">
-            خاطراتت را با چاپ حرفه‌ای و قاب‌های زیبا به دیوار خانه بیاویز. مجموعه جدید ما با متریال باکیفیت و طراحی مدرن آماده
-            روشن کردن فضای خانه‌ات است.
+            خاطراتت را با چاپ حرفه‌ای و قاب‌های زیبا به دیوار خانه بیاویز.
+            مجموعه جدید ما با متریال باکیفیت و طراحی مدرن آماده روشن کردن فضای
+            خانه‌ات است.
           </p>
           <div className="flex items-center gap-3">
             <Link
@@ -36,5 +37,5 @@ export function HeroBanner() {
         </div>
       </div>
     </section>
-  )
+  );
 }
