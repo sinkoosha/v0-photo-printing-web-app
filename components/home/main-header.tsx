@@ -1,6 +1,7 @@
-import Link from "next/link"
+import Link from "next/link";
 
 const secondaryLinks = [
+  { href: "/products/polaroid", label: "چاپ پولاروید" },
   { href: "#", label: "چاپ عکس" },
   { href: "#", label: "آلبوم عکس" },
   { href: "#", label: "قاب عکس" },
@@ -8,13 +9,16 @@ const secondaryLinks = [
   { href: "#", label: "راهنمای استفاده" },
   { href: "#", label: "درباره ما" },
   { href: "#", label: "تماس با ما" },
-]
+];
 
 export function MainHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#E9E1DA] bg-white/80 backdrop-blur">
       <div className="mx-auto flex w-full max-w-[1200px] flex-row-reverse items-center gap-3 px-4 py-4 md:px-6">
-        <Link href="#" className="shrink-0 text-2xl font-semibold tracking-tight text-[#3B2F2A]">
+        <Link
+          href="#"
+          className="shrink-0 text-2xl font-semibold tracking-tight text-[#3B2F2A]"
+        >
           AX<span className="text-[#C78555]">Print</span>
         </Link>
         <div className="flex-1">
@@ -69,5 +73,5 @@ export function MainHeader() {
         </nav>
       </div>
     </header>
-  )
+  );
 }
