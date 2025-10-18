@@ -91,8 +91,8 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-              <ImageIcon className="h-6 w-6 text-primary-foreground" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
+              <ImageIcon className="h-6 w-6 text-accent-contrast" />
             </div>
             <span className="text-xl font-bold text-foreground">چاپ‌عکس</span>
           </Link>
@@ -106,7 +106,7 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
         <div className="mx-auto max-w-4xl">
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">پیگیری سفارش</h1>
-            <p className="text-muted-foreground">
+            <p className="text-foreground-muted">
               کد سفارش: <span className="font-mono font-bold">{mockOrder.id}</span>
             </p>
           </div>
@@ -127,33 +127,33 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
                           <div
                             className={`flex h-12 w-12 items-center justify-center rounded-full ${
                               status.completed
-                                ? "bg-primary text-primary-foreground"
+                                ? "bg-accent text-accent-contrast"
                                 : index === currentStatusIndex
-                                  ? "bg-primary/20 text-primary"
-                                  : "bg-muted text-muted-foreground"
+                                  ? "bg-accent/20 text-accent"
+                                  : "bg-surface-muted text-foreground-muted"
                             }`}
                           >
                             <Icon className="h-6 w-6" />
                           </div>
                           {!isLast && (
-                            <div className={`w-0.5 h-16 mt-2 ${status.completed ? "bg-primary" : "bg-border"}`} />
+                            <div className={`w-0.5 h-16 mt-2 ${status.completed ? "bg-accent" : "bg-border"}`} />
                           )}
                         </div>
                         <div className="flex-1 pb-8">
                           <div className="flex items-start justify-between mb-1">
                             <h3 className="font-semibold">{status.label}</h3>
                             {status.completed ? (
-                              <span className="text-sm text-muted-foreground">{status.timestamp}</span>
+                              <span className="text-sm text-foreground-muted">{status.timestamp}</span>
                             ) : index === currentStatusIndex ? (
-                              <span className="flex items-center gap-1 text-sm text-primary">
+                              <span className="flex items-center gap-1 text-sm text-accent">
                                 <Clock className="h-4 w-4" />
                                 در حال انجام
                               </span>
                             ) : (
-                              <span className="text-sm text-muted-foreground">{status.timestamp}</span>
+                              <span className="text-sm text-foreground-muted">{status.timestamp}</span>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground">{status.description}</p>
+                          <p className="text-sm text-foreground-muted">{status.description}</p>
                         </div>
                       </div>
                     </div>
@@ -167,15 +167,15 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
               <h2 className="text-xl font-semibold mb-4">اطلاعات ارسال</h2>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">آدرس تحویل:</span>
+                  <span className="text-foreground-muted">آدرس تحویل:</span>
                   <span className="text-left">{mockOrder.shippingAddress}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">کد رهگیری پست:</span>
+                  <span className="text-foreground-muted">کد رهگیری پست:</span>
                   <span className="font-mono">{mockOrder.trackingNumber}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">تاریخ سفارش:</span>
+                  <span className="text-foreground-muted">تاریخ سفارش:</span>
                   <span>{mockOrder.date}</span>
                 </div>
               </div>
@@ -187,7 +187,7 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
               <div className="space-y-4">
                 {mockOrder.items.map((item) => (
                   <div key={item.id} className="flex gap-4 pb-4 border-b border-border last:border-0 last:pb-0">
-                    <div className="w-20 h-20 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                    <div className="w-20 h-20 rounded-lg overflow-hidden bg-surface-muted flex-shrink-0">
                       <img
                         src={item.imageUrl || "/placeholder.svg"}
                         alt="پیش‌نمایش"
@@ -196,8 +196,8 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold mb-1">{item.size}</h3>
-                      <p className="text-sm text-muted-foreground mb-1">{item.material}</p>
-                      <p className="text-sm text-muted-foreground">تعداد: {item.quantity} عدد</p>
+                      <p className="text-sm text-foreground-muted mb-1">{item.material}</p>
+                      <p className="text-sm text-foreground-muted">تعداد: {item.quantity} عدد</p>
                     </div>
                   </div>
                 ))}
@@ -205,7 +205,7 @@ export function OrderTracking({ orderId }: OrderTrackingProps) {
               <div className="mt-6 pt-6 border-t border-border">
                 <div className="flex justify-between items-center">
                   <span className="font-semibold">جمع کل:</span>
-                  <span className="text-2xl font-bold text-primary">{formatPrice(mockOrder.total)} تومان</span>
+                  <span className="text-2xl font-bold text-accent">{formatPrice(mockOrder.total)} تومان</span>
                 </div>
               </div>
             </Card>

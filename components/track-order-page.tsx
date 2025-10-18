@@ -27,8 +27,8 @@ export function TrackOrderPage() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-              <ImageIcon className="h-6 w-6 text-primary-foreground" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
+              <ImageIcon className="h-6 w-6 text-accent-contrast" />
             </div>
             <span className="text-xl font-bold text-foreground">چاپ‌عکس</span>
           </Link>
@@ -43,12 +43,12 @@ export function TrackOrderPage() {
           <Card className="p-8">
             <div className="text-center mb-8">
               <div className="flex justify-center mb-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                  <Search className="h-8 w-8 text-primary" />
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+                  <Search className="h-8 w-8 text-accent" />
                 </div>
               </div>
               <h1 className="text-2xl font-bold mb-2">پیگیری سفارش</h1>
-              <p className="text-muted-foreground">کد پیگیری سفارش خود را وارد کنید</p>
+              <p className="text-foreground-muted">کد پیگیری سفارش خود را وارد کنید</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -70,15 +70,15 @@ export function TrackOrderPage() {
             </form>
 
             <div className="mt-6 pt-6 border-t border-border">
-              <p className="text-sm text-muted-foreground text-center">
+              <p className="text-sm text-foreground-muted text-center">
                 کد پیگیری سفارش در ایمیل تایید برای شما ارسال شده است
               </p>
             </div>
           </Card>
 
-          <Card className="p-6 mt-6 bg-primary/5 border-primary/20">
+          <Card className="p-6 mt-6 bg-accent/5 border-accent/20">
             <h3 className="font-semibold mb-2 text-sm">نیاز به کمک دارید؟</h3>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-foreground-muted mb-4">
               در صورت بروز مشکل در پیگیری سفارش، با پشتیبانی ما تماس بگیرید
             </p>
             <Button variant="outline" size="sm" className="w-full bg-transparent">

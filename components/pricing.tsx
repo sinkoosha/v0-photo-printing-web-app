@@ -27,16 +27,16 @@ export function Pricing() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">قیمت‌های شفاف</h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-foreground-muted text-pretty max-w-2xl mx-auto leading-relaxed">
             بدون هزینه پنهان - قیمت نهایی را قبل از پرداخت مشاهده کنید
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
           {sizes.map((size, index) => (
-            <Card key={index} className={`p-6 relative ${size.popular ? "border-primary shadow-lg" : ""}`}>
+            <Card key={index} className={`p-6 relative ${size.popular ? "border-accent shadow-lg" : ""}`}>
               {size.popular && (
-                <div className="absolute -top-3 right-1/2 translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
+                <div className="absolute -top-3 right-1/2 translate-x-1/2 bg-accent text-accent-contrast px-4 py-1 rounded-full text-sm font-medium">
                   محبوب‌ترین
                 </div>
               )}
@@ -44,13 +44,13 @@ export function Pricing() {
                 <h3 className="text-xl font-bold mb-2">{size.name}</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-bold">{size.price}</span>
-                  <span className="text-muted-foreground">تومان</span>
+                  <span className="text-foreground-muted">تومان</span>
                 </div>
               </div>
               <ul className="space-y-3 mb-6">
                 {size.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm">
-                    <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                    <Check className="h-4 w-4 text-accent flex-shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -62,7 +62,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-sm text-muted-foreground">
+        <p className="mt-8 text-center text-sm text-foreground-muted">
           * قیمت‌ها به ازای هر برگ می‌باشد. هزینه ارسال در مرحله پرداخت محاسبه می‌شود.
         </p>
       </div>

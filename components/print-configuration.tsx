@@ -23,6 +23,20 @@ interface PrintMaterial {
   priceMultiplier: number
 }
 
+interface EnhancementOption {
+  id: string
+  name: string
+  description: string
+  priceAdjustment: number
+}
+
+interface PackagingOption {
+  id: string
+  name: string
+  description: string
+  price: number
+}
+
 const printSizes: PrintSize[] = [
   { id: "10x15", name: "۱۰×۱۵ سانتی‌متر", dimensions: "10×15 cm", price: 15000 },
   { id: "13x18", name: "۱۳×۱۸ سانتی‌متر", dimensions: "13×18 cm", price: 25000 },
@@ -37,17 +51,90 @@ const printMaterials: PrintMaterial[] = [
   { id: "canvas", name: "بوم نقاشی", description: "حرفه‌ای - مناسب دکوراسیون", priceMultiplier: 2.5 },
 ]
 
+const colorCorrections: EnhancementOption[] = [
+  {
+    id: "none",
+    name: "بدون تصحیح",
+    description: "اعمال هیچگونه تنظیم خودکار",
+    priceAdjustment: 0,
+  },
+  {
+    id: "smart",
+    name: "اصلاح هوشمند",
+    description: "تنظیم نور و رنگ بر اساس محتوای عکس",
+    priceAdjustment: 4000,
+  },
+  {
+    id: "studio",
+    name: "ادیت استودیو",
+    description: "بازبینی متخصص چاپ برای خروجی پرتره",
+    priceAdjustment: 9500,
+  },
+]
+
+const borderStyles: EnhancementOption[] = [
+  {
+    id: "borderless",
+    name: "بدون حاشیه",
+    description: "چاپ لب به لب مناسب آلبوم",
+    priceAdjustment: 0,
+  },
+  {
+    id: "classic",
+    name: "قاب سفید ۵ میلی‌متری",
+    description: "فضای مناسب قاب‌بندی هنری",
+    priceAdjustment: 2500,
+  },
+  {
+    id: "gallery",
+    name: "فریم گالری مشکی",
+    description: "کنتراست بالا برای نمایشگاه",
+    priceAdjustment: 6500,
+  },
+]
+
+const packagingOptions: PackagingOption[] = [
+  {
+    id: "standard",
+    name: "بسته‌بندی استاندارد",
+    description: "پاکت مقاوم با پوشش ضد رطوبت",
+    price: 0,
+  },
+  {
+    id: "flat",
+    name: "پک فلت آرت",
+    description: "تخته محافظ و تسمه کاغذی برای چاپ‌های بزرگ",
+    price: 18000,
+  },
+  {
+    id: "gift",
+    name: "بسته هدیه",
+    description: "جعبه سخت، کاغذ کرپ و روبان",
+    price: 35000,
+  },
+]
+
 export function PrintConfiguration() {
   const [selectedSize, setSelectedSize] = useState<string>("20x30")
   const [selectedMaterial, setSelectedMaterial] = useState<string>("glossy")
   const [quantity, setQuantity] = useState<number>(1)
+  const [selectedCorrection, setSelectedCorrection] = useState<string>("smart")
+  const [selectedBorder, setSelectedBorder] = useState<string>("classic")
+  const [selectedPackaging, setSelectedPackaging] = useState<string>("flat")
 
   const currentSize = printSizes.find((s) => s.id === selectedSize)
   const currentMaterial = printMaterials.find((m) => m.id === selectedMaterial)
+  const currentCorrection = colorCorrections.find((c) => c.id === selectedCorrection)
+  const currentBorder = borderStyles.find((b) => b.id === selectedBorder)
+  const currentPackaging = packagingOptions.find((p) => p.id === selectedPackaging)
 
   const basePrice = currentSize?.price || 0
   const materialMultiplier = currentMaterial?.priceMultiplier || 1
-  const totalPrice = basePrice * materialMultiplier * quantity
+  const perPrintBase = basePrice * materialMultiplier
+  const perPrintExtras = (currentCorrection?.priceAdjustment || 0) + (currentBorder?.priceAdjustment || 0)
+  const perPrintTotal = perPrintBase + perPrintExtras
+  const packagingPrice = currentPackaging?.price || 0
+  const totalPrice = perPrintTotal * quantity + packagingPrice
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("fa-IR").format(price)
@@ -58,8 +145,8 @@ export function PrintConfiguration() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-              <ImageIcon className="h-6 w-6 text-primary-foreground" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
+              <ImageIcon className="h-6 w-6 text-accent-contrast" />
             </div>
             <span className="text-xl font-bold text-foreground">چاپ‌عکس</span>
           </Link>
@@ -73,7 +160,7 @@ export function PrintConfiguration() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">تنظیمات چاپ</h1>
-            <p className="text-muted-foreground">سایز، متریال و تعداد چاپ خود را انتخاب کنید</p>
+            <p className="text-foreground-muted">سایز، متریال و تعداد چاپ خود را انتخاب کنید</p>
           </div>
 
           <div className="grid lg:grid-cols-[1fr_380px] gap-8">
@@ -87,15 +174,15 @@ export function PrintConfiguration() {
                       <RadioGroupItem value={size.id} id={size.id} className="peer sr-only" />
                       <Label
                         htmlFor={size.id}
-                        className="flex items-center justify-between p-4 rounded-lg border-2 border-border cursor-pointer hover:bg-accent/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 transition-all"
+                        className="flex items-center justify-between p-4 rounded-lg border-2 border-border cursor-pointer hover:bg-accent/50 peer-data-[state=checked]:border-accent peer-data-[state=checked]:bg-accent/5 transition-all"
                       >
                         <div className="flex items-center gap-3">
                           <div className="flex flex-col">
                             <span className="font-semibold">{size.name}</span>
-                            <span className="text-sm text-muted-foreground">{size.dimensions}</span>
+                            <span className="text-sm text-foreground-muted">{size.dimensions}</span>
                           </div>
                           {size.popular && (
-                            <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">
+                            <span className="text-xs bg-accent text-accent-contrast px-2 py-1 rounded-full">
                               محبوب
                             </span>
                           )}
@@ -116,14 +203,14 @@ export function PrintConfiguration() {
                       <RadioGroupItem value={material.id} id={material.id} className="peer sr-only" />
                       <Label
                         htmlFor={material.id}
-                        className="flex items-center justify-between p-4 rounded-lg border-2 border-border cursor-pointer hover:bg-accent/50 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 transition-all"
+                        className="flex items-center justify-between p-4 rounded-lg border-2 border-border cursor-pointer hover:bg-accent/50 peer-data-[state=checked]:border-accent peer-data-[state=checked]:bg-accent/5 transition-all"
                       >
                         <div className="flex flex-col gap-1">
                           <span className="font-semibold">{material.name}</span>
-                          <span className="text-sm text-muted-foreground">{material.description}</span>
+                          <span className="text-sm text-foreground-muted">{material.description}</span>
                         </div>
                         {material.priceMultiplier > 1 && (
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-sm text-foreground-muted">
                             +{Math.round((material.priceMultiplier - 1) * 100)}%
                           </span>
                         )}
@@ -131,6 +218,101 @@ export function PrintConfiguration() {
                     </div>
                   ))}
                 </RadioGroup>
+              </Card>
+
+              {/* Advanced Enhancements */}
+              <Card className="p-6 space-y-6">
+                <div>
+                  <h2 className="text-xl font-semibold">تنظیمات پیشرفته</h2>
+                  <p className="text-sm text-foreground-muted">گزینه‌های حرفه‌ای چاپ برای کنترل بیشتر خروجی</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2">تصحیح رنگ</h3>
+                    <RadioGroup
+                      value={selectedCorrection}
+                      onValueChange={setSelectedCorrection}
+                      className="grid gap-3"
+                    >
+                      {colorCorrections.map((option) => (
+                        <div key={option.id} className="relative">
+                          <RadioGroupItem value={option.id} id={`correction-${option.id}`} className="peer sr-only" />
+                          <Label
+                            htmlFor={`correction-${option.id}`}
+                            className="flex items-center justify-between gap-4 rounded-lg border-2 border-border p-4 transition-all hover:bg-accent/50 peer-data-[state=checked]:border-accent peer-data-[state=checked]:bg-accent/5"
+                          >
+                            <div>
+                              <p className="font-medium">{option.name}</p>
+                              <p className="text-xs text-foreground-muted mt-1">{option.description}</p>
+                            </div>
+                            {option.priceAdjustment > 0 ? (
+                              <span className="text-xs text-foreground-muted">
+                                +{formatPrice(option.priceAdjustment)} تومان / هر چاپ
+                              </span>
+                            ) : (
+                              <span className="text-xs text-foreground-muted">بدون هزینه اضافه</span>
+                            )}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2">حاشیه چاپ</h3>
+                    <RadioGroup value={selectedBorder} onValueChange={setSelectedBorder} className="grid gap-3">
+                      {borderStyles.map((option) => (
+                        <div key={option.id} className="relative">
+                          <RadioGroupItem value={option.id} id={`border-${option.id}`} className="peer sr-only" />
+                          <Label
+                            htmlFor={`border-${option.id}`}
+                            className="flex items-center justify-between gap-4 rounded-lg border-2 border-border p-4 transition-all hover:bg-accent/50 peer-data-[state=checked]:border-accent peer-data-[state=checked]:bg-accent/5"
+                          >
+                            <div>
+                              <p className="font-medium">{option.name}</p>
+                              <p className="text-xs text-foreground-muted mt-1">{option.description}</p>
+                            </div>
+                            {option.priceAdjustment > 0 ? (
+                              <span className="text-xs text-foreground-muted">
+                                +{formatPrice(option.priceAdjustment)} تومان / هر چاپ
+                              </span>
+                            ) : (
+                              <span className="text-xs text-foreground-muted">بدون هزینه اضافه</span>
+                            )}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-semibold mb-2">نوع بسته‌بندی</h3>
+                    <RadioGroup value={selectedPackaging} onValueChange={setSelectedPackaging} className="grid gap-3">
+                      {packagingOptions.map((option) => (
+                        <div key={option.id} className="relative">
+                          <RadioGroupItem value={option.id} id={`packaging-${option.id}`} className="peer sr-only" />
+                          <Label
+                            htmlFor={`packaging-${option.id}`}
+                            className="flex items-center justify-between gap-4 rounded-lg border-2 border-border p-4 transition-all hover:bg-accent/50 peer-data-[state=checked]:border-accent peer-data-[state=checked]:bg-accent/5"
+                          >
+                            <div>
+                              <p className="font-medium">{option.name}</p>
+                              <p className="text-xs text-foreground-muted mt-1">{option.description}</p>
+                            </div>
+                            {option.price > 0 ? (
+                              <span className="text-xs text-foreground-muted">
+                                +{formatPrice(option.price)} تومان / سفارش
+                              </span>
+                            ) : (
+                              <span className="text-xs text-foreground-muted">شامل در قیمت پایه</span>
+                            )}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+                </div>
               </Card>
 
               {/* Quantity Selection */}
@@ -147,7 +329,7 @@ export function PrintConfiguration() {
                   </Button>
                   <div className="flex-1 text-center">
                     <span className="text-3xl font-bold">{quantity}</span>
-                    <span className="text-muted-foreground mr-2">عدد</span>
+                    <span className="text-foreground-muted mr-2">عدد</span>
                   </div>
                   <Button variant="outline" size="icon" onClick={() => setQuantity(quantity + 1)}>
                     <Plus className="h-4 w-4" />
@@ -163,39 +345,57 @@ export function PrintConfiguration() {
 
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">سایز:</span>
+                    <span className="text-foreground-muted">سایز:</span>
                     <span className="font-medium">{currentSize?.name}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">متریال:</span>
+                    <span className="text-foreground-muted">متریال:</span>
                     <span className="font-medium">{currentMaterial?.name}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">تعداد:</span>
+                    <span className="text-foreground-muted">تعداد:</span>
                     <span className="font-medium">{quantity} عدد</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-foreground-muted">تصحیح رنگ:</span>
+                    <span className="font-medium">{currentCorrection?.name}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-foreground-muted">حاشیه:</span>
+                    <span className="font-medium">{currentBorder?.name}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-foreground-muted">بسته‌بندی:</span>
+                    <span className="font-medium">{currentPackaging?.name}</span>
                   </div>
 
                   <div className="pt-4 border-t border-border">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">قیمت پایه:</span>
-                      <span>{formatPrice(basePrice)} تومان</span>
+                      <span className="text-foreground-muted">قیمت پایه هر چاپ:</span>
+                      <span>{formatPrice(perPrintBase)} تومان</span>
                     </div>
-                    {materialMultiplier > 1 && (
+                    {perPrintExtras > 0 && (
                       <div className="flex justify-between text-sm mb-2">
-                        <span className="text-muted-foreground">هزینه متریال:</span>
-                        <span>×{materialMultiplier}</span>
+                        <span className="text-foreground-muted">افزودنی‌های هر چاپ:</span>
+                        <span>{formatPrice(perPrintExtras)} تومان</span>
                       </div>
                     )}
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">تعداد:</span>
+                      <span className="text-foreground-muted">تعداد چاپ:</span>
                       <span>×{quantity}</span>
                     </div>
+                    {packagingPrice > 0 && (
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="text-foreground-muted">بسته‌بندی ویژه:</span>
+                        <span>{formatPrice(packagingPrice)} تومان</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-4 border-t border-border">
                     <div className="flex justify-between items-center">
                       <span className="font-semibold">جمع کل:</span>
-                      <span className="text-2xl font-bold text-primary">{formatPrice(totalPrice)} تومان</span>
+                      <span className="text-2xl font-bold text-accent">{formatPrice(totalPrice)} تومان</span>
                     </div>
                   </div>
                 </div>
@@ -207,14 +407,14 @@ export function PrintConfiguration() {
                   </Link>
                 </Button>
 
-                <p className="text-xs text-muted-foreground text-center mt-4">
+                <p className="text-xs text-foreground-muted text-center mt-4">
                   هزینه ارسال در مرحله پرداخت محاسبه می‌شود
                 </p>
               </Card>
 
-              <Card className="p-6 mt-4 bg-primary/5 border-primary/20">
+              <Card className="p-6 mt-4 bg-accent/5 border-accent/20">
                 <h3 className="font-semibold mb-3 text-sm">تخفیف ویژه</h3>
-                <p className="text-sm text-muted-foreground">با سفارش بیش از ۱۰ عدد، از ۱۵٪ تخفیف ویژه بهره‌مند شوید!</p>
+                <p className="text-sm text-foreground-muted">با سفارش بیش از ۱۰ عدد، از ۱۵٪ تخفیف ویژه بهره‌مند شوید!</p>
               </Card>
             </div>
           </div>

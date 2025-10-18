@@ -30,7 +30,7 @@ export function Features() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">چرا چاپ‌عکس؟</h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-foreground-muted text-pretty max-w-2xl mx-auto leading-relaxed">
             ما با ارائه بهترین خدمات و کیفیت، تجربه‌ای متفاوت از چاپ عکس را برای شما فراهم می‌کنیم
           </p>
         </div>
@@ -38,11 +38,11 @@ export function Features() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
             <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                <feature.icon className="h-6 w-6 text-primary" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
+                <feature.icon className="h-6 w-6 text-accent" />
               </div>
               <h3 className="mb-2 text-lg font-semibold">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+              <p className="text-sm text-foreground-muted leading-relaxed">{feature.description}</p>
             </Card>
           ))}
         </div>

@@ -30,11 +30,11 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="container py-20 md:py-24 bg-muted/30">
+    <section id="how-it-works" className="container py-20 md:py-24 bg-surface-muted/30">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">نحوه کار</h2>
-          <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-foreground-muted text-pretty max-w-2xl mx-auto leading-relaxed">
             در چهار مرحله ساده، عکس‌های خود را چاپ کنید
           </p>
         </div>
@@ -44,15 +44,15 @@ export function HowItWorks() {
             <div key={index} className="relative">
               <Card className="p-6 h-full">
                 <div className="mb-4 flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold text-lg">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-accent-contrast font-bold text-lg">
                     {step.number}
                   </div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                    <step.icon className="h-6 w-6 text-primary" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
+                    <step.icon className="h-6 w-6 text-accent" />
                   </div>
                 </div>
                 <h3 className="mb-2 text-lg font-semibold">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+                <p className="text-sm text-foreground-muted leading-relaxed">{step.description}</p>
               </Card>
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -left-4 w-8 h-0.5 bg-border" />

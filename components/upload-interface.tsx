@@ -65,8 +65,8 @@ export function UploadInterface() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-              <ImageIcon className="h-6 w-6 text-primary-foreground" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
+              <ImageIcon className="h-6 w-6 text-accent-contrast" />
             </div>
             <span className="text-xl font-bold text-foreground">چاپ‌عکس</span>
           </Link>
@@ -80,23 +80,23 @@ export function UploadInterface() {
         <div className="mx-auto max-w-5xl">
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">آپلود تصاویر</h1>
-            <p className="text-muted-foreground">عکس‌های خود را برای چاپ آپلود کنید</p>
+            <p className="text-foreground-muted">عکس‌های خود را برای چاپ آپلود کنید</p>
           </div>
 
           <Card
             className={`p-8 mb-8 border-2 border-dashed transition-colors ${
-              isDragging ? "border-primary bg-primary/5" : "border-border"
+              isDragging ? "border-accent bg-accent/5" : "border-border"
             }`}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
           >
             <div className="flex flex-col items-center justify-center text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-                <Upload className="h-8 w-8 text-primary" />
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+                <Upload className="h-8 w-8 text-accent" />
               </div>
               <h3 className="text-lg font-semibold mb-2">فایل‌های خود را اینجا بکشید</h3>
-              <p className="text-sm text-muted-foreground mb-6">یا روی دکمه زیر کلیک کنید</p>
+              <p className="text-sm text-foreground-muted mb-6">یا روی دکمه زیر کلیک کنید</p>
               <Button
                 onClick={() => {
                   const input = document.createElement("input")
@@ -109,7 +109,7 @@ export function UploadInterface() {
               >
                 انتخاب فایل‌ها
               </Button>
-              <p className="text-xs text-muted-foreground mt-4">فرمت‌های پشتیبانی شده: JPG, PNG, HEIC</p>
+              <p className="text-xs text-foreground-muted mt-4">فرمت‌های پشتیبانی شده: JPG, PNG, HEIC</p>
             </div>
           </Card>
 

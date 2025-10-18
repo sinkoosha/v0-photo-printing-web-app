@@ -67,8 +67,8 @@ export function CartPage() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-              <ImageIcon className="h-6 w-6 text-primary-foreground" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
+              <ImageIcon className="h-6 w-6 text-accent-contrast" />
             </div>
             <span className="text-xl font-bold text-foreground">چاپ‌عکس</span>
           </Link>
@@ -82,17 +82,17 @@ export function CartPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">سبد خرید</h1>
-            <p className="text-muted-foreground">بررسی و تکمیل سفارش شما</p>
+            <p className="text-foreground-muted">بررسی و تکمیل سفارش شما</p>
           </div>
 
           {cartItems.length === 0 ? (
             <Card className="p-12 text-center">
               <div className="flex flex-col items-center gap-4">
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-muted">
-                  <ShoppingBag className="h-10 w-10 text-muted-foreground" />
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-surface-muted">
+                  <ShoppingBag className="h-10 w-10 text-foreground-muted" />
                 </div>
                 <h2 className="text-xl font-semibold">سبد خرید شما خالی است</h2>
-                <p className="text-muted-foreground">برای شروع، عکس‌های خود را آپلود کنید</p>
+                <p className="text-foreground-muted">برای شروع، عکس‌های خود را آپلود کنید</p>
                 <Button asChild className="mt-4">
                   <Link href="/upload">شروع چاپ</Link>
                 </Button>
@@ -104,7 +104,7 @@ export function CartPage() {
                 {cartItems.map((item) => (
                   <Card key={item.id} className="p-4">
                     <div className="flex gap-4">
-                      <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                      <div className="w-24 h-24 rounded-lg overflow-hidden bg-surface-muted flex-shrink-0">
                         <img
                           src={item.imageUrl || "/placeholder.svg"}
                           alt="پیش‌نمایش"
@@ -115,14 +115,14 @@ export function CartPage() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-semibold">{item.size}</h3>
-                            <p className="text-sm text-muted-foreground">{item.material}</p>
+                            <p className="text-sm text-foreground-muted">{item.material}</p>
                           </div>
                           <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
                             <Trash2 className="h-4 w-4 text-destructive" />
                           </Button>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-muted-foreground">تعداد: {item.quantity} عدد</span>
+                          <span className="text-sm text-foreground-muted">تعداد: {item.quantity} عدد</span>
                           <span className="font-bold">{formatPrice(item.price * item.quantity)} تومان</span>
                         </div>
                       </div>
@@ -137,15 +137,15 @@ export function CartPage() {
 
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">جمع جزء:</span>
+                      <span className="text-foreground-muted">جمع جزء:</span>
                       <span>{formatPrice(subtotal)} تومان</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">هزینه ارسال:</span>
+                      <span className="text-foreground-muted">هزینه ارسال:</span>
                       <span>{shippingCost === 0 ? "رایگان" : `${formatPrice(shippingCost)} تومان`}</span>
                     </div>
                     {appliedDiscount > 0 && (
-                      <div className="flex justify-between text-sm text-green-500">
+                        <div className="flex justify-between text-sm text-success">
                         <span>تخفیف ({appliedDiscount}%):</span>
                         <span>-{formatPrice(discount)} تومان</span>
                       </div>
@@ -153,7 +153,7 @@ export function CartPage() {
                     <div className="pt-3 border-t border-border">
                       <div className="flex justify-between items-center">
                         <span className="font-semibold">جمع کل:</span>
-                        <span className="text-2xl font-bold text-primary">{formatPrice(total)} تومان</span>
+                        <span className="text-2xl font-bold text-accent">{formatPrice(total)} تومان</span>
                       </div>
                     </div>
                   </div>
@@ -171,7 +171,7 @@ export function CartPage() {
                         <Tag className="h-4 w-4" />
                       </Button>
                     </div>
-                    {appliedDiscount > 0 && <p className="text-xs text-green-500">کد تخفیف با موفقیت اعمال شد!</p>}
+                    {appliedDiscount > 0 && <p className="text-xs text-success">کد تخفیف با موفقیت اعمال شد!</p>}
                   </div>
 
                   <Button size="lg" className="w-full" asChild>
@@ -179,7 +179,7 @@ export function CartPage() {
                   </Button>
 
                   {shippingCost > 0 && (
-                    <p className="text-xs text-muted-foreground text-center mt-4">
+                    <p className="text-xs text-foreground-muted text-center mt-4">
                       با خرید بیش از ۲۰۰,۰۰۰ تومان، ارسال رایگان!
                     </p>
                   )}

@@ -77,7 +77,7 @@ export function PhotoEditor({ photo, onBack }: PhotoEditorProps) {
 
       <main className="container py-8">
         <div className="grid lg:grid-cols-[1fr_320px] gap-6">
-          <Card className="p-4 flex items-center justify-center bg-muted/30 min-h-[500px]">
+          <Card className="p-4 flex items-center justify-center bg-surface-muted/30 min-h-[500px]">
             <canvas ref={canvasRef} className="max-w-full max-h-[600px] object-contain" />
           </Card>
 
@@ -89,10 +89,10 @@ export function PhotoEditor({ photo, onBack }: PhotoEditorProps) {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Sun className="h-4 w-4 text-muted-foreground" />
+                      <Sun className="h-4 w-4 text-foreground-muted" />
                       <label className="text-sm font-medium">روشنایی</label>
                     </div>
-                    <span className="text-sm text-muted-foreground">{brightness}%</span>
+                    <span className="text-sm text-foreground-muted">{brightness}%</span>
                   </div>
                   <Slider
                     value={[brightness]}
@@ -106,10 +106,10 @@ export function PhotoEditor({ photo, onBack }: PhotoEditorProps) {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Contrast className="h-4 w-4 text-muted-foreground" />
+                      <Contrast className="h-4 w-4 text-foreground-muted" />
                       <label className="text-sm font-medium">کنتراست</label>
                     </div>
-                    <span className="text-sm text-muted-foreground">{contrast}%</span>
+                    <span className="text-sm text-foreground-muted">{contrast}%</span>
                   </div>
                   <Slider
                     value={[contrast]}
@@ -123,10 +123,10 @@ export function PhotoEditor({ photo, onBack }: PhotoEditorProps) {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <Droplets className="h-4 w-4 text-muted-foreground" />
+                      <Droplets className="h-4 w-4 text-foreground-muted" />
                       <label className="text-sm font-medium">اشباع رنگ</label>
                     </div>
-                    <span className="text-sm text-muted-foreground">{saturation}%</span>
+                    <span className="text-sm text-foreground-muted">{saturation}%</span>
                   </div>
                   <Slider
                     value={[saturation]}
@@ -150,9 +150,9 @@ export function PhotoEditor({ photo, onBack }: PhotoEditorProps) {
               </div>
             </Card>
 
-            <Card className="p-6 bg-primary/5 border-primary/20">
+            <Card className="p-6 bg-accent/5 border-accent/20">
               <h3 className="font-semibold mb-2">نکات مهم</h3>
-              <ul className="text-sm text-muted-foreground space-y-2">
+              <ul className="text-sm text-foreground-muted space-y-2">
                 <li>• برای بهترین کیفیت چاپ، از تصاویر با رزولوشن بالا استفاده کنید</li>
                 <li>• تنظیمات روشنایی و کنتراست را با دقت انجام دهید</li>
                 <li>• پس از ویرایش، تصویر را ذخیره کنید</li>
