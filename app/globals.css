@@ -13,11 +13,25 @@
     color-scheme: dark;
   }
 
+  html {
+    @apply bg-background;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply min-h-screen bg-background text-foreground font-sans antialiased;
   }
 
   * {
     @apply border-border outline-ring/50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .shadow-soft {
+    box-shadow: 0 24px 60px -32px hsl(var(--color-accent-shadow) / 0.35);
   }
 }

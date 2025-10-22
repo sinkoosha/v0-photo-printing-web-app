@@ -36,7 +36,7 @@ export function BlogSection() {
         {posts.map((post) => (
           <article
             key={post.title}
-            className="group flex h-full snap-center flex-col overflow-hidden rounded-2xl border border-border bg-surface/90 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            className="group flex h-full snap-center flex-col overflow-hidden rounded-2xl border border-border/70 bg-surface shadow-soft transition hover:-translate-y-1 hover:shadow-soft"
           >
             <div className="relative h-40 w-full overflow-hidden">
               <Image

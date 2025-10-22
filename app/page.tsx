@@ -15,7 +15,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background">
       <NotificationBar />
       <MainHeader />
-      <main className="flex-1 space-y-4 pb-16">
+      <main className="flex-1 space-y-12 pb-16">
         <HeroBanner />
         <CategoryGrid />
         <PromoTiles />

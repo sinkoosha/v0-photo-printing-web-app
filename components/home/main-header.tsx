@@ -13,9 +13,9 @@ const secondaryLinks = [
 
 export function MainHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-surface/90 shadow-soft backdrop-blur">
       <div className="mx-auto flex w-full max-w-container flex-row-reverse items-center gap-3 px-4 py-4 md:px-6">
-        <Link href="#" className="shrink-0 text-2xl font-semibold tracking-tight text-foreground">
+        <Link href="/" className="shrink-0 text-2xl font-semibold tracking-tight text-foreground">
           AX<span className="text-accent">Print</span>
         </Link>
         <div className="flex-1">
@@ -27,7 +27,7 @@ export function MainHeader() {
               id="site-search"
               type="search"
               placeholder="دنبال چه چیزی هستی؟"
-              className="w-full rounded-full border border-border bg-surface/80 px-4 py-2 text-sm text-foreground-muted shadow-sm placeholder:text-foreground-soft focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/30"
+              className="w-full rounded-full border border-border/80 bg-surface px-4 py-2 text-sm text-foreground-muted shadow-soft placeholder:text-foreground-soft focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/30"
             />
           </div>
         </div>
@@ -53,7 +53,7 @@ export function MainHeader() {
           <span className="text-lg">☰</span>
         </button>
       </div>
-      <div className="border-t border-border/70 bg-surface/70">
+      <div className="border-t border-border/70 bg-surface/80">
         <nav
           aria-label="لینک‌های ثانویه"
           className="mx-auto flex w-full max-w-container items-center gap-6 overflow-x-auto px-4 py-3 text-sm text-foreground-muted md:px-6"

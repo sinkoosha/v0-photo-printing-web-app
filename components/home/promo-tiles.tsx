@@ -21,19 +21,19 @@ export function PromoTiles() {
         {promos.map((promo) => (
           <article
             key={promo.title}
-            className="flex flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-border bg-surface-soft/80 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg sm:flex-row"
+            className="flex flex-col justify-between gap-6 overflow-hidden rounded-2xl border border-border/70 bg-surface-soft/80 p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-soft sm:flex-row"
           >
             <div className="flex flex-col items-start gap-4 text-right sm:text-right">
               <h3 className="text-xl font-semibold text-foreground">{promo.title}</h3>
               <Link
                 href="#"
-                className="inline-flex items-center gap-2 rounded-full border border-transparent bg-surface/80 px-4 py-2 text-sm font-medium text-accent transition hover:border-accent/40 hover:bg-surface"
+                className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface/90 px-4 py-2 text-sm font-medium text-accent transition hover:border-accent/30 hover:bg-surface"
               >
                 {promo.action}
                 <span aria-hidden>↗</span>
               </Link>
             </div>
-            <div className="relative h-40 w-full overflow-hidden rounded-2xl bg-surface/60 sm:h-32 sm:w-40">
+            <div className="relative h-40 w-full overflow-hidden rounded-2xl border border-border/60 bg-surface/70 sm:h-32 sm:w-40">
               <Image
                 src={promo.image}
                 alt={promo.title}

@@ -14,7 +14,7 @@ const socialLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-overlay/60 pt-12 text-foreground-muted">
+    <footer className="bg-overlay pt-12 text-foreground-muted">
       <div className="mx-auto w-full max-w-container px-4 md:px-6">
         <div className="grid gap-10 pb-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-3 text-right">
@@ -56,7 +56,7 @@ export function SiteFooter() {
                 <Link
                   key={social.label}
                   href={social.href}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-surface text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
                 >
                   {social.label[0]}
                 </Link>
@@ -64,12 +64,12 @@ export function SiteFooter() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-4 border-t border-border py-6 text-sm text-foreground-muted md:flex-row md:justify-between">
+        <div className="flex flex-col items-center gap-4 border-t border-border/70 py-6 text-sm text-foreground-muted md:flex-row md:justify-between">
           <div className="flex flex-wrap justify-center gap-3">
             {[1, 2, 3].map((badge) => (
               <span
                 key={badge}
-                className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-surface text-xs text-foreground-soft"
+                className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border/70 bg-surface text-xs text-foreground-soft shadow-soft"
               >
                 مجوز {badge}
               </span>

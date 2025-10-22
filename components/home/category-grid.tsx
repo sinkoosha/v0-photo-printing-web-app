@@ -61,7 +61,7 @@ export function CategoryGrid() {
       <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {categories.map((category) => (
           <article key={category.name} className="group flex flex-col items-center text-center">
-            <div className="relative flex h-32 w-32 items-center justify-center rounded-full bg-surface shadow-lg ring-1 ring-border/80 transition-transform duration-200 before:absolute before:inset-[12%] before:-z-10 before:rounded-full before:bg-[radial-gradient(circle_at_top,hsl(var(--color-surface)/1),hsl(var(--color-surface-muted)/1)_65%,hsl(var(--color-surface-soft)/1))] before:opacity-0 before:transition-opacity before:duration-200 group-hover:-translate-y-1 group-hover:before:opacity-100">
+            <div className="relative flex h-32 w-32 items-center justify-center rounded-full border border-border/70 bg-surface shadow-soft transition-transform duration-200 before:absolute before:inset-[12%] before:-z-10 before:rounded-full before:bg-[radial-gradient(circle_at_top,hsl(var(--color-surface)/1),hsl(var(--color-surface-muted)/1)_65%,hsl(var(--color-surface-soft)/1))] before:opacity-0 before:transition-opacity before:duration-200 group-hover:-translate-y-1 group-hover:before:opacity-100">
               <span
                 className="pointer-events-none absolute -bottom-8 left-1/2 h-3 w-20 -translate-x-1/2 rounded-full bg-accent-muted/60 blur-[8px] transition duration-200 group-hover:scale-110 group-hover:bg-accent-soft/50"
                 aria-hidden="true"
@@ -76,7 +76,7 @@ export function CategoryGrid() {
                 />
               </div>
               {category.badge ? (
-                <span className="absolute -top-3 -left-3 inline-flex min-w-[3rem] -rotate-6 items-center justify-center rounded-full bg-accent px-2 py-1 text-xs font-semibold text-accent-contrast shadow-md">
+                <span className="absolute -top-3 -left-3 inline-flex min-w-[3rem] -rotate-6 items-center justify-center rounded-full bg-accent px-2 py-1 text-xs font-semibold text-accent-contrast shadow-soft">
                   {category.badge}
                 </span>
               ) : null}
